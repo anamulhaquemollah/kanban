@@ -8,7 +8,7 @@ const Task = ({ id, index, taskName }) => {
         ref={provided.innerRef}
           {...provided.dragHandleProps}
           {...provided.draggableProps}
-          className="border border-gray-300 m-2 text-center"
+          className="border border-black my-2 mx-4 text-center bg-[#DDDDDD] "
         >
           {taskName}
         </div>
