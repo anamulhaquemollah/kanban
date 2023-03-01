@@ -2,7 +2,6 @@ import AddNew from "./components/AddNew";
 import Board from "./components/Board";
 import { DragDropContext } from "react-beautiful-dnd";
 import { useDispatch } from "react-redux";
-import { addProgress } from "./redux/slice/progressSlice";
 import { updateTask } from "./redux/slice/taskSlice";
 import { useSelector } from "react-redux";
 
@@ -21,7 +20,6 @@ function App() {
       status: destination.droppableId, 
     }))
 
-    console.log(result)
   }
   return (
     <div className="py-10">

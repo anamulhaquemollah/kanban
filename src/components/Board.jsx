@@ -5,8 +5,6 @@ import { Droppable } from "react-beautiful-dnd";
 const Board = () => {
   const store = useSelector((store) => store);
   const tasks = store.tasks.taskList;
-  const inprogress = store.inprogress.inprogressList;
-  console.log(tasks);
 
   return (
     <div className="flex justify-center gap-6 pt-5">
