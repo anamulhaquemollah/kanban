@@ -1,9 +1,20 @@
+import { Draggable } from "react-beautiful-dnd";
 
-
-const Task = ({title}) => {
+const Task = ({ id, index, taskName }) => {
   return (
-    <div className="border border-gray-300 m-2 text-center">{title}</div>
-  )
-}
+    <Draggable draggableId={id.toString()} index={index}>
+      {(provided) => (
+        <div
+        ref={provided.innerRef}
+          {...provided.dragHandleProps}
+          {...provided.draggableProps}
+          className="border border-gray-300 m-2 text-center"
+        >
+          {taskName}
+        </div>
+      )}
+    </Draggable>
+  );
+};
 
-export default Task
+export default Task;

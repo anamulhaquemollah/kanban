@@ -1,30 +1,35 @@
-import AddNew from './components/AddNew';
-import Board from './components/Board';
-import { useSelector } from 'react-redux';
+import AddNew from "./components/AddNew";
+import Board from "./components/Board";
+import { DragDropContext } from "react-beautiful-dnd";
+import { useDispatch } from "react-redux";
+import { addProgress } from "./redux/slice/progressSlice";
+import { updateTask } from "./redux/slice/taskSlice";
+import { useSelector } from "react-redux";
 
 function App() {
-  const tasks =  useSelector((store)=>{return store.tasks})
-  console.log(tasks)
-  const boardList= [
-    {
-      id: "todo", 
-      title:"To Do"
-    }, 
-    {
-      id: "progress", 
-      title: "In Progress"
-    }, 
-    {
-      id: "done", 
-      title: "Done"
-    }
-  ]
+  const {taskList} = useSelector(store => store.tasks)
+  const dispatch = useDispatch(); 
+  const onDragEnd = (result)=>{
+    const {destination, source, draggableId} = result; 
+    if(!destination) return undefined; 
+    if(destination.droppableId === source.droppableId && destination.index === source.index) return; 
+
+    
+    const idx = taskList.findIndex(value=> value.id === Number(draggableId))
+    dispatch(updateTask({
+      idx, 
+      status: destination.droppableId, 
+    }))
+
+    console.log(result)
+  }
   return (
     <div className="py-10">
-     <AddNew/>
-     <div className='flex justify-center gap-6 pt-5'>
-      {boardList.map(board=> <Board key={board.id} boardDetails = {board}/>)}
-     </div>
+      <AddNew />
+      {/* <Body/> */}
+      <DragDropContext onDragEnd={onDragEnd}>
+        <Board />
+      </DragDropContext>
     </div>
   );
 }
