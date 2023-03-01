@@ -24,7 +24,7 @@ function App() {
   return (
     <div className="py-10">
       <AddNew />
-      {/* <Body/> */}
+     
       <DragDropContext onDragEnd={onDragEnd}>
         <Board />
       </DragDropContext>
